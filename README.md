@@ -1,22 +1,22 @@
 #cloud-env
-[cloud-env](https://github.com/ryanj/cloud-env) provides consistent naming for server configuration strings that are published by various cloud hosting providers.
+[cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
 
-It works by checking the system environment (`process.env`) for known configuration strings ([OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-stings).
+![MultiPaaS](http://i.imgur.com/fCi6YX6.png)
 
-If host-provided configs are not found, local development defaults are returned - allowing you to configure once, and run anywhere.
-
-See the [Configuration Strings](#configuration-strings) list for more information about the settings that this module will automatically resolve.
+It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-stings).
 
 ## Installation
-The resulting config object should contain any configuration settings that `cloud-env` was able to detect - including the server `PORT` number and bind `IP` address:
+
+The resulting config object contains the configuration settings that `cloud-env` was able to detect - including the server `PORT` number and bind `IP` address:
 
 ``` js
   //npm install cloud-env
   var config = require('cloud-env')
 ```
 
-## Listen up
+See the [Configuration Strings](#configuration-strings) list for more information about the settings that this module will automatically resolve.
 
+## Listen up
 Make sure to pass `config.PORT` and `config.IP` to your server's `listen` function:
 
 ```js
@@ -24,6 +24,8 @@ app.listen(config.PORT, config.IP, function () {
   console.log("Listening on "+config.IP+", port "+config.PORT)
 });
 ```
+
+If host-provided configs are not found, local development defaults are returned - allowing you to configure once, and run anywhere.
 
 ## Configuration Strings
 Reliable configuration settings for local dev AND for "the cloud":
