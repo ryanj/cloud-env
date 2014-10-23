@@ -1,7 +1,6 @@
-#cloud-env
-[cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
+#cloud-env [![npm version](http://img.shields.io/npm/v/cloud-env.svg)](https://www.npmjs.org/package/cloud-env) [![Dependency Check](http://img.shields.io/david/ryanj/cloud-env.svg)](https://david-dm.org/ryanj/cloud-env) [![monthly downloads](http://img.shields.io/npm/dm/cloud-env.svg)](https://www.npmjs.org/package/cloud-env) [![license](http://img.shields.io/npm/l/cloud-env.svg)](https://www.npmjs.org/package/cloud-env)
 
-![MultiPaaS](http://i.imgur.com/fCi6YX6.png)
+[cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
 
 It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-stings).
 
@@ -52,4 +51,8 @@ MYSQLDB_DB_PORT      | OPENSHIFT_MYSQLDB_DB_PORT, MYSQLDB_DB_PORT | 3306
 MYSQLDB_DB_USERNAME      | OPENSHIFT_MYSQLDB_DB_USERNAME, MYSQLDB_DB_USERNAME | undefined
 MYSQLDB_DB_PASSWORD      | OPENSHIFT_MYSQLDB_DB_PASSWORD, MYSQLDB_DB_PASSWORD | undefined
 
+### Advanced Configuration
+
 See [`config-multipaas`](https://github.com/ryanj/config-multipaas/) and the related [`config-chain` API docs](https://github.com/dominictarr/config-chain/#boring-api-docs) for a more advanced configuration solution that incorporates the same set of cloud configuration keys.
+
+![MultiPaaS](http://i.imgur.com/fCi6YX6.png)
