@@ -26,6 +26,19 @@ app.listen(config.PORT, config.IP, function () {
 
 If host-provided configs are not found, local development defaults are returned - allowing you to configure once, and run anywhere.
 
+### Provide your own defaults
+Use `.get('KEYNAME')` to fetch keys by name, optionally providing your own default values in the process:
+
+```js
+port = config.get('PORT', 8000)
+bind_address = config.get('IP','127.0.0.1')
+app.listen(port, bind_address, function () {
+  console.log("Listening on " + bind_address + ", port " + port)
+});
+```
+
+The above example will default to port 8000 instead of 8080, and will attempt to bind on '127.0.0.0.1' instead of '0.0.0.0'.
+
 ## Configuration Strings
 Reliable configuration settings for local dev AND for "the cloud":
 

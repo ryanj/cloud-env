@@ -64,13 +64,18 @@ var defaults = {
   }
 }
 
+var find_key = function (key, default_key){
+  return defaults.openshift[key] || defaults.cloud[key] || default_key || defaults.dev[key];
+}
+
 var resolve_config = function (){
   env = {}
   for(var key in defaults.cloud){
-    env[key] = defaults.openshift[key] || defaults.cloud[key] || defaults.dev[key];
+    env[key] = find_key(key);
   }
   return env
 }
 
 var exports = module.exports = resolve_config();
 exports.defaults = defaults
+exports.get = find_key
