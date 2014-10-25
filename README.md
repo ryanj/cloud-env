@@ -2,7 +2,7 @@
 
 [cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
 
-It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-stings).
+It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-strings).
 
 ## Installation
 
