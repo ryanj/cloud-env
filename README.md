@@ -1,5 +1,7 @@
 #cloud-env [![npm version](http://img.shields.io/npm/v/cloud-env.svg)](https://www.npmjs.org/package/cloud-env) [![Dependency Check](http://img.shields.io/david/ryanj/cloud-env.svg)](https://david-dm.org/ryanj/cloud-env) [![monthly downloads](http://img.shields.io/npm/dm/cloud-env.svg)](https://www.npmjs.org/package/cloud-env) [![license](http://img.shields.io/npm/l/cloud-env.svg)](https://www.npmjs.org/package/cloud-env)
 
+[![npm stats](https://nodei.co/npm/cloud-env.png?downloads=true&stars=true)](https://www.npmjs.org/package/cloud-env)
+
 [cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
 
 It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/)), normalizing the results into [a well-defined list](#configuration-strings).
