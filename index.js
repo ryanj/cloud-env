@@ -69,7 +69,7 @@ var find_key = function (key, default_key){
 }
 
 var resolve_config = function (){
-  env = {}
+  var env = {}
   for(var key in defaults.cloud){
     env[key] = find_key(key);
   }
