@@ -61,21 +61,59 @@ var defaults = {
     MYSQL_DB_PORT: process.env.OPENSHIFT_MYSQL_DB_PORT,
     MYSQL_DB_USERNAME: process.env.OPENSHIFT_MYSQL_DB_USERNAME,
     MYSQL_DB_PASSWORD: process.env.OPENSHIFT_MYSQL_DB_PASSWORD
+  },
+  v3: {
+    APP_NAME: process.env.OPENSHIFT_BUILD_NAMESPACE,
+    MONGODB_DB_HOST: process.env.MONGODB_SERVICE_HOST,
+    MONGODB_DB_PORT: process.env.MONGODB_SERVICE_PORT,
+    MONGODB_DB_USERNAME: process.env.MONGODB_USER,
+    MONGODB_DB_PASSWORD: process.env.MONGODB_PASSWORD,
+    POSTGRESQL_DB_HOST: process.env.POSTGRESQL_SERVICE_HOST,
+    POSTGRESQL_DB_PORT: process.env.POSTGRESQL_SERVICE_PORT,
+    POSTGRESQL_DB_USERNAME: process.env.POSTGRESQL_USER,
+    POSTGRESQL_DB_PASSWORD: process.env.POSTGRESQL_PASSWORD,
+    MYSQL_DB_HOST: process.env.MYSQL_SERVICE_HOST,
+    MYSQL_DB_PORT: process.env.MYSQL_SERVICE_PORT,
+    MYSQL_DB_USERNAME: process.env.MYSQL_USER,
+    MYSQL_DB_PASSWORD: process.env.MYSQL_PASSWORD
   }
-}
-
-var find_key = function (key, default_key){
-  return defaults.openshift[key] || defaults.cloud[key] || default_key || defaults.dev[key];
 }
 
 var resolve_config = function (){
-  var env = {}
-  for(var key in defaults.cloud){
-    env[key] = find_key(key);
+  var env = {};
+  var self_svc_key = false;
+  var db_names     = ['postgresql','mongodb','mysql'];
+  var db_key       = '';
+  var svc_name     = process.env.OPENSHIFT_BUILD_NAME;
+
+  //kubernetes and openshiftV3 configs
+  // Detect service host and port from v3 build namespace
+  if(svc_name){
+    // strip build number
+    self_svc_key = svc_name.replace(/-\d+$/,'').toUpperCase().replace(/-/g, '_');
+    defaults.v3['PORT'] = process.env[self_svc_key+'_SERVICE_PORT'];
+    defaults.v3['IP'] = process.env[self_svc_key+'_SERVICE_HOST'];
   }
-  return env
+  // Sniff common v3 database configs
+  for(var db in db_names){
+    db_key = db_names[db].toUpperCase();
+    if( process.env[db_key+'_USER'] && process.env[db_key+'_PASSWORD'] && process.env[db_key+'_SERVICE_HOST'] && process.env[db_key+'_SERVICE_PORT'] )
+    {
+      defaults.v3[db_key+'_DB_URL'] = db_names[db]+"://"+process.env[db_key+'_USER']+":"+process.env[db_key+'_PASSWORD']+"@"+process.env[db_key+'_SERVICE_HOST']+":"+process.env[db_key+'_SERVICE_PORT'];
+    }
+  }
+  env.defaults = defaults;
+
+  // config key accessor
+  env.get = function (key, default_key){
+    return defaults.v3[key] || defaults.openshift[key] || defaults.cloud[key] || default_key || defaults.dev[key];
+  }
+
+  // collapse / unify available configs
+  for(var key in defaults.cloud){
+    env[key] = env.get(key);
+  }
+  return env;
 }
 
 var exports = module.exports = resolve_config();
-exports.defaults = defaults
-exports.get = find_key
