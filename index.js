@@ -92,7 +92,6 @@ var resolve_config = function (){
     // strip build number
     self_svc_key = svc_name.replace(/-\d+$/,'').toUpperCase().replace(/-/g, '_');
     defaults.v3['PORT'] = process.env[self_svc_key+'_SERVICE_PORT'];
-    defaults.v3['IP'] = process.env[self_svc_key+'_SERVICE_HOST'];
   }
   // Sniff common v3 database configs
   for(var db in db_names){
