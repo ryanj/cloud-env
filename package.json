@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/ryanj/cloud-env.git"
   },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Consistent naming for cloud-provided server config strings",
   "dependencies": {},
   "devDependencies": {
