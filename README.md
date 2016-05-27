@@ -1,8 +1,15 @@
 #cloud-env [![npm version](http://img.shields.io/npm/v/cloud-env.svg)](https://www.npmjs.org/package/cloud-env) [![Build Status](http://img.shields.io/travis/ryanj/cloud-env.svg)](https://travis-ci.org/ryanj/cloud-env)
 
-[cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
+**!!AUTOCONFIGURE JS CODE FOR USE ON ANY PLATFORM NODE!!**
 
-It works by checking the system environment (`process.env`) for known configuration strings (published by [OpenShift](http://openshift.com/), [Heroku](http://heroku.com/) [Modulus](http://help.modulus.io/customer/portal/articles/1660583)), normalizing the results into [a well-defined list](#configuration-strings).
+[cloud-env](https://github.com/ryanj/cloud-env) provides a vendor-neutral interface for autoconfiguring your app, making it portable across all major cloud hosting platforms / deployment targets:
+
+* [OpenShift](https://developers.openshift.com/languages/nodejs/environment-variables.html#listen)
+* [Heroku](https://devcenter.heroku.com/articles/dynos#web-dynos)
+* [Modulus](http://help.modulus.io/customer/portal/articles/1660583)
+* [CloudFoundry](http://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#PORT)
+
+It works by checking the system environment (`process.env`) for known configuration strings, normalizing the results into [a well-defined list](#configuration-strings).
 
 [![npm stats](https://nodei.co/npm/cloud-env.png?downloads=true&stars=true)](https://www.npmjs.org/package/cloud-env)
 
