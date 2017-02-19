@@ -9,7 +9,7 @@
   "description": "Consistent naming for cloud-provided server config strings",
   "dependencies": {},
   "devDependencies": {
-    "tap": "^5.7.0"
+    "tap": "^10.2.0"
   },
   "keywords": [
     "config",
