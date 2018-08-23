@@ -79,6 +79,18 @@ var defaults = {
   }
 }
 
+var findComponents = function(){
+  var component_list = [];
+  var name = '';
+  for( var key in process.env ){
+    name = key.replace('COMPONENT_','').replace('_HOST','')
+    if(key.indexOf('COMPONENT_'+name+'_HOST') == 0 && process.env['COMPONENT_'+name+'_PORT']){
+      component_list.push(name);
+    }
+  }
+  return component_list;
+}
+
 var resolve_config = function (){
   var env = {};
   var self_svc_key = false;
@@ -101,7 +113,17 @@ var resolve_config = function (){
       defaults.v3[db_key+'_DB_URL'] = db_names[db]+"://"+process.env[db_key+'_USER']+":"+process.env[db_key+'_PASSWORD']+"@"+process.env[db_key+'_SERVICE_HOST']+":"+process.env[db_key+'_SERVICE_PORT'];
     }
   }
-  env.defaults = defaults;
+
+  env.defaults   = defaults;
+  env.components = findComponents();
+  env.component  = {};
+
+  for(var cmp in env.components){
+    env.component[env.components[cmp]] = {
+      host: process.env['COMPONENT_'+env.components[cmp]+'_HOST'],
+      port: process.env['COMPONENT_'+env.components[cmp]+'_PORT']
+    }
+  }
 
   // config key accessor
   env.get = function (key, default_key){
